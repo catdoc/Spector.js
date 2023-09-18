@@ -6,8 +6,8 @@ var BUILD_DIR = path.resolve(MAIN_DIR, "./dist");
 var DEV_DIR = path.resolve(MAIN_DIR, "./minigame");
 
 var buildConfig = function(env) {
-    var isProd = env.prod;
-    var isMinigame = env.minigame;
+    var isProd = env.prod !== undefined;
+    var isMinigame = env.minigame !== undefined;
     console.log("isProd:" + isProd + ", isMinigame:" + isMinigame);
     var config = {
         watch: !isProd,
@@ -72,7 +72,6 @@ var buildConfig = function(env) {
         plugins: [
             new webpack.DefinePlugin({
                 isMinigame : isMinigame,
-                resultViewScssPath : isMinigame ? JSON.stringify("") : JSON.stringify("../styles/resultView.scss"),
                 __DEV__: !isProd,
                 __VERSION__: JSON.stringify('1.0.0')
             })
