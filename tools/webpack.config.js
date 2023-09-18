@@ -2,7 +2,7 @@ var path = require("path");
 
 var MAIN_DIR = path.resolve(__dirname, "../");
 var BUILD_DIR = path.resolve(MAIN_DIR, "./dist");
-var DEV_DIR = path.resolve(MAIN_DIR, "./.temp");
+var DEV_DIR = path.resolve(MAIN_DIR, "./temp");
 
 var buildConfig = function(env) {
     var isProd = env.prod;
@@ -37,6 +37,7 @@ var buildConfig = function(env) {
         module: {
             rules: [{
                 test: /\.tsx?$/,
+                // exclude: [ path.resolve(MAIN_DIR, "./src/backend/spies/xrSpy.ts") ],
                 loader: "ts-loader",
                 options: {
                     configFile: "src/tsconfig.json"
