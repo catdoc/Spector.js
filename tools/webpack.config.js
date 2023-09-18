@@ -1,16 +1,24 @@
 var path = require("path");
+const webpack = require('webpack');
 
 var MAIN_DIR = path.resolve(__dirname, "../");
 var BUILD_DIR = path.resolve(MAIN_DIR, "./dist");
-var DEV_DIR = path.resolve(MAIN_DIR, "./temp");
+var DEV_DIR = path.resolve(MAIN_DIR, "./minigame");
 
 var buildConfig = function(env) {
     var isProd = env.prod;
-
+    var isMinigame = env.minigame;
+    console.log("isProd:" + isProd + ", isMinigame:" + isMinigame);
     var config = {
         watch: !isProd,
         context: MAIN_DIR,
-        entry: [
+        entry: isMinigame ? [
+            // "./vendors/ace.js",
+            // "./vendors/ace-mode-glsl.js",
+            // "./vendors/ace-theme-monokai.js",
+            // "./vendors/ace-ext-searchbox.js",
+            "./src/spector.ts"
+        ] : [
             "./vendors/ace.js",
             "./vendors/ace-mode-glsl.js",
             "./vendors/ace-theme-monokai.js",
@@ -21,7 +29,7 @@ var buildConfig = function(env) {
         output: {
             path: isProd ? BUILD_DIR : DEV_DIR,
             publicPath: "/",
-            filename: "spector.bundle.js",
+            filename: isProd ? "spector.bundle.js" : "spector.bundle.dev.js",
             libraryTarget: "umd",
             library: "SPECTOR",
             umdNamedDefine: true
@@ -44,10 +52,10 @@ var buildConfig = function(env) {
                 }
             }, {
                 test: /\.scss$/,
-                use: [ "style-loader?insert=html", "css-loader", "sass-loader" ]
+                use: isMinigame ? ["css-loader", "sass-loader"] : [ "style-loader?insert=html", "css-loader", "sass-loader" ]
             }, {
                 test: /\.css$/,
-                use: [ "style-loader?insert=html", "css-loader" ]
+                use: isMinigame ? ["css-loader"] : [ "style-loader?insert=html", "css-loader" ]
             }, {
                 test: /ace.js$/,
                 // use: [ "exports-loader?ace" ]
@@ -60,7 +68,15 @@ var buildConfig = function(env) {
                 test: /spector.js$/,
                 use: [ "exports-loader?SPECTOR" ]
             }]
-        }
+        },
+        plugins: [
+            new webpack.DefinePlugin({
+                isMinigame : isMinigame,
+                resultViewScssPath : isMinigame ? JSON.stringify("") : JSON.stringify("../styles/resultView.scss"),
+                __DEV__: !isProd,
+                __VERSION__: JSON.stringify('1.0.0')
+            })
+        ]
     };
 
     if (!isProd) {

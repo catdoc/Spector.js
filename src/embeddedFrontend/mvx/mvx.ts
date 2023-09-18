@@ -91,25 +91,29 @@ export class MVX {
     }
 
     private setForRender(immediate: boolean) {
-        if (!this.willRender) {
-            this.willRender = true;
-            if (immediate) {
-                this.compose();
-            }
-            else {
-                setTimeout(this.compose.bind(this), MVX.REFRESHRATEINMILLISECONDS);
+        if (!isMinigame) {
+            if (!this.willRender) {
+                this.willRender = true;
+                if (immediate) {
+                    this.compose();
+                }
+                else {
+                    setTimeout(this.compose.bind(this), MVX.REFRESHRATEINMILLISECONDS);
+                }
             }
         }
     }
 
     private compose(): void {
-        // Render once.
-        this.willRender = false;
+        if (!isMinigame) {
+            // Render once.
+            this.willRender = false;
 
-        // Render and compose.
-        this.compositor.compose(this.rootStateId);
+            // Render and compose.
+            this.compositor.compose(this.rootStateId);
 
-        // Clean up the pending list of processed states.
-        this.stateStore.flushPendingOperations();
+            // Clean up the pending list of processed states.
+            this.stateStore.flushPendingOperations();
+        }
     }
 }

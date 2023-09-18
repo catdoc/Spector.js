@@ -1145,6 +1145,7 @@ exports.hasCssString = function(id, doc) {
 };
 
 exports.importCssString = function importCssString(cssText, id, target) {
+    if (wx) return; // for minigame 
     var container = target;
     if (!target || !target.getRootNode) {
         container = document;

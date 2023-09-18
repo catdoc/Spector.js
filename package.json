@@ -31,6 +31,8 @@
     "build:concatBundleFunc": "concat-cli -f tools/spector.ext.header.js dist/spector.bundle.js tools/spector.ext.footer.js -o extensions/spector.bundle.func.js",
     "build:tslint": "tslint -c ./tslint.json -p ./src/tsconfig.json",
     "build": "run-s build:tslint build:bundle build:copybuild:copy:bundle build:concatBundleFunc -n",
+    "dev:bundle_minigame": "webpack --config tools/webpack.config.js --env=dev --env=minigame",
+    "dev_minigame": "run-s build:tslint dev:bundle_minigame",
     "dev:bundle": "webpack --config tools/webpack.config.js --env=dev",
     "dev": "run-s build:tslint dev:bundle",
     "test": "echo \"Error: no test specified\" && exit 1"

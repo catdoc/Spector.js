@@ -121,52 +121,55 @@ export class Spector {
     }
 
     public displayUI(disableTracking: boolean = false) {
-        if (!this.captureMenu) {
-            this.getCaptureUI();
+        if (!isMinigame) {
+            if (!this.captureMenu) {
+                this.getCaptureUI();
 
-            this.captureMenu.onPauseRequested.add(this.pause, this);
-            this.captureMenu.onPlayRequested.add(this.play, this);
-            this.captureMenu.onPlayNextFrameRequested.add(this.playNextFrame, this);
-            this.captureMenu.onCaptureRequested.add((info) => {
-                if (info) {
-                    this.captureCanvas(info.ref);
+                this.captureMenu.onPauseRequested.add(this.pause, this);
+                this.captureMenu.onPlayRequested.add(this.play, this);
+                this.captureMenu.onPlayNextFrameRequested.add(this.playNextFrame, this);
+                this.captureMenu.onCaptureRequested.add((info) => {
+                    if (info) {
+                        this.captureCanvas(info.ref);
+                    }
+                }, this);
+
+                setInterval(() => { this.captureMenu.setFPS(this.getFps()); }, 1000);
+
+                if (!disableTracking) {
+                    this.captureMenu.trackPageCanvases();
                 }
-            }, this);
 
-            setInterval(() => { this.captureMenu.setFPS(this.getFps()); }, 1000);
-
-            if (!disableTracking) {
-                this.captureMenu.trackPageCanvases();
+                this.captureMenu.display();
             }
+            if (!this.resultView) {
+                this.getResultUI();
 
-            this.captureMenu.display();
-        }
-
-        if (!this.resultView) {
-            this.getResultUI();
-
-            this.onCapture.add((capture) => {
-                this.resultView.display();
-                this.resultView.addCapture(capture);
-            });
+                this.onCapture.add((capture) => {
+                    this.resultView.display();
+                    this.resultView.addCapture(capture);
+                });
+            }
         }
     }
 
     public getResultUI(): ResultView {
-        if (!this.resultView) {
-            this.resultView = new ResultView();
-            this.resultView.onSourceCodeChanged.add((sourceCodeEvent) => {
-                this.rebuildProgramFromProgramId(sourceCodeEvent.programId,
-                    sourceCodeEvent.sourceVertex,
-                    sourceCodeEvent.sourceFragment,
-                    (program) => {
-                        this.referenceNewProgram(sourceCodeEvent.programId, program);
-                        this.resultView.showSourceCodeError(null);
-                    },
-                    (error) => {
-                        this.resultView.showSourceCodeError(error);
-                    });
-            });
+        if (!isMinigame) {
+            if (!this.resultView) {
+                this.resultView = new ResultView();
+                this.resultView.onSourceCodeChanged.add((sourceCodeEvent) => {
+                    this.rebuildProgramFromProgramId(sourceCodeEvent.programId,
+                        sourceCodeEvent.sourceVertex,
+                        sourceCodeEvent.sourceFragment,
+                        (program) => {
+                            this.referenceNewProgram(sourceCodeEvent.programId, program);
+                            this.resultView.showSourceCodeError(null);
+                        },
+                        (error) => {
+                            this.resultView.showSourceCodeError(error);
+                        });
+                });
+            }
         }
         return this.resultView;
     }

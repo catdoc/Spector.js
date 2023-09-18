@@ -15,7 +15,12 @@ export class Time {
     }
 
     private dateBasedPerformanceNow(): number {
-        return performance.timing.navigationStart + performance.now();
+        if (performance.timing && performance.timing.navigationStart) {
+            return performance.timing.navigationStart + performance.now();
+        }
+        else {
+            return performance.now();
+        }
     }
 
     public static get now(): number {

@@ -45,7 +45,7 @@ var SPECTORTOOLS;
                 this.loadScript("/dist/spector.bundle.js");
             }
             else {
-                this.loadScript("/.temp/spector.bundle.js");
+                this.loadScript("/dist/spector.bundle.dev.js");
             }
         }
 

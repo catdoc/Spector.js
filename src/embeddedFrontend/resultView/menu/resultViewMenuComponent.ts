@@ -63,16 +63,20 @@ export class ResultViewMenuComponent extends BaseComponent<IResultViewMenuState>
         openButton.addEventListener("click", (_) => {
             if (openButton.getAttribute("open") === "true") {
                 openButton.setAttribute("open", "false");
-                for (let i = 0; i < lis.length; i++) {
-                    (lis[i] as HTMLElement).style.display = "none";
-                    (lis[i] as HTMLElement).style.visibility = "hidden";
+                if (lis) {
+                    for (let i = 0; i < lis.length; i++) {
+                        (lis[i] as HTMLElement).style.display = "none";
+                        (lis[i] as HTMLElement).style.visibility = "hidden";
+                    }
                 }
             }
             else {
                 openButton.setAttribute("open", "true");
-                for (let i = 0; i < lis.length; i++) {
-                    (lis[i] as HTMLElement).style.display = "block";
-                    (lis[i] as HTMLElement).style.visibility = "visible";
+                if (lis) {
+                    for (let i = 0; i < lis.length; i++) {
+                        (lis[i] as HTMLElement).style.display = "block";
+                        (lis[i] as HTMLElement).style.visibility = "visible";
+                    }
                 }
             }
         });
