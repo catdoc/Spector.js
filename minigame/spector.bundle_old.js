@@ -1,15 +1,41 @@
 (function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
+	if(typeof exports === 'object' && typeof module === 'object') {
 		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
+        module.exports.default = module.exports;
+        if (root) {
+            Object.keys(root).forEach(function(propName) {
+                // propName 是对象的属性名
+                // obj[propName] 是属性值
+                // console.log("root key : " + propName);
+                //console.log("root value : " + propName + " -> " + root[propName]);
+              });              
+            root.window.SPECTOR = module.exports;
+            console.log("after set");
+            Object.keys(root).forEach(function(propName) {
+                // console.log("root key : " + propName);
+                //console.log("root value : " + propName + " -> " + root[propName]);
+              }); 
+        }
+        console.log("module.exports:" + module.exports + "," + module.exports.default + ",root:" + root);
+        return module.exports;
+    }    
+	else if(typeof define === 'function' && define.amd) {
 		define("SPECTOR", [], factory);
-	else if(typeof exports === 'object')
+        console.log("define : " + factory);
+    }
+	else if(typeof exports === 'object') {
 		exports["SPECTOR"] = factory();
-	else
+        console.log("exports['SPECTOR'] : " + exports["SPECTOR"]);
+    }
+	else {
 		root["SPECTOR"] = factory();
+        console.log("root['SPECTOR'] : " + root["SPECTOR"]);
+    }
 })(self, () => {
 return /******/ (() => { // webpackBootstrap
-/******/ 	var __webpack_modules__ = ({
+/******/ 	
+            console.log("before define var __webpack_modules__, self : " + self );
+            var __webpack_modules__ = ({
 
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/embeddedFrontend/styles/captureMenu.scss":
 /*!***********************************************************************************************************************************!*\
@@ -60,7 +86,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Montserrat:300,400);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/* The main window */\n.resultViewComponent {\n  position: absolute;\n  z-index: 99999;\n  border: 1px solid black;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background-color: #222;\n  opacity: 1;\n  visibility: hidden;\n  display: none;\n  color: #f9f9f9;\n  font-family: Consolas, monaco, monospace;\n  font-size: 14px;\n  font-weight: 500;\n}\n.resultViewComponent.active {\n  visibility: visible;\n  display: block;\n}\n.resultViewComponent, .resultViewComponent:after, .resultViewComponent:before {\n  box-sizing: content-box;\n}\n\n.resultViewMenuComponent {\n  font-family: \"Montserrat\", sans-serif;\n  font-size: 13px;\n  font-weight: 300;\n  line-height: 40px;\n  flex: 1 100%;\n  display: flex;\n  flex-flow: row wrap;\n  height: 42px;\n  outline: 0 none;\n  border-bottom: 2px solid #222;\n  box-sizing: border-box;\n  list-style: none;\n  margin: 0;\n  background: #2c2c2c;\n  display: -webkit-box;\n  display: -moz-box;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-flex-flow: row wrap;\n  flex-flow: row wrap;\n  justify-content: flex-end;\n}\n.resultViewMenuComponent .resultViewMenuOpen {\n  display: none;\n  visibility: hidden;\n}\n.resultViewMenuComponent a {\n  outline: 0 none;\n  text-decoration: none;\n  display: block;\n  padding: 0 20px 0 20px;\n  color: #cccccc;\n  background: #2c2c2c;\n  box-sizing: border-box;\n  height: 100%;\n}\n.resultViewMenuComponent a.active {\n  background: #222;\n  color: white;\n  font-weight: 400;\n  border-bottom: 2px solid #F0640D;\n}\n.resultViewMenuComponent a:hover {\n  background: #222;\n  color: #c9c9c9;\n  cursor: pointer;\n  transition: color 0.3s;\n  -webkit-transition: color 0.3s;\n  -moz-transition: color 0.3s;\n}\n.resultViewMenuComponent a:hover.active {\n  color: #F0640D;\n  transition: color 0;\n  -webkit-transition: color 0;\n  -moz-transition: color 0;\n}\n.resultViewMenuComponent a.clearSearch {\n  padding: 0px;\n  margin-left: -30px;\n  margin-right: 20px;\n  z-index: 9000;\n  color: #f9f9f9;\n}\n.resultViewMenuComponent a.clearSearch:hover {\n  background: #2c2c2c;\n  color: #F0640D;\n}\n@media all and (max-width: 1024px) {\n  .resultViewMenuComponent {\n    padding: 0px;\n    position: absolute;\n    overflow-y: visible;\n    top: 0px;\n    left: 0px;\n    right: 0px;\n    bottom: 0px;\n    z-index: 999999;\n    display: block;\n  }\n  .resultViewMenuComponent .resultViewMenuOpen {\n    display: block;\n    visibility: visible;\n  }\n  .resultViewMenuComponent li:not(.resultViewMenuSmall) {\n    display: none;\n    visibility: hidden;\n  }\n  .resultViewMenuComponent li {\n    background: #2c2c2c;\n  }\n  .resultViewMenuComponent li.searchContainer {\n    background: #464646;\n  }\n  .resultViewMenuComponent a.active {\n    background: #2c2c2c;\n  }\n}\n.resultViewMenuComponent input {\n  border: 0;\n  font-family: \"Montserrat\", sans-serif;\n  font-weight: 300;\n  padding: 0 20px 0 20px;\n  background: #464646;\n  color: #f9f9f9;\n  height: 40px;\n  position: relative;\n  top: -1px;\n  box-sizing: border-box;\n}\n.resultViewMenuComponent input:focus {\n  border: 0;\n  outline: 0 none;\n}\n.resultViewMenuComponent .clearSearch {\n  position: relative;\n  background: transparent;\n  display: inline;\n  padding: 0px;\n  margin-left: -30px;\n  z-index: 9000;\n  color: #F0640D;\n}\n.resultViewMenuComponent .clearSearch:hover {\n  background: transparent !important;\n}\n.resultViewMenuComponent ::-webkit-input-placeholder { /* WebKit, Blink, Edge */\n  color: #cccccc;\n}\n.resultViewMenuComponent :-moz-placeholder { /* Mozilla Firefox 4 to 18 */\n  color: #cccccc;\n}\n.resultViewMenuComponent ::-moz-placeholder { /* Mozilla Firefox 19+ */\n  color: #cccccc;\n}\n.resultViewMenuComponent :-ms-input-placeholder { /* Internet Explorer 10-11 */\n  color: #cccccc;\n}\n\n.resultViewContentComponent {\n  position: absolute;\n  top: 40px;\n  left: 0;\n  bottom: 0;\n  right: 0;\n}\n\n.informationColumnLeftComponent {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 50%;\n  overflow: auto;\n  overflow-x: hidden;\n  overflow-y: visible;\n}\n\n.informationColumnRightComponent {\n  position: absolute;\n  top: 0;\n  left: 50%;\n  bottom: 0;\n  right: 0;\n  overflow: auto;\n  overflow-x: hidden;\n  overflow-y: visible;\n}\n\n.captureListComponent {\n  position: absolute;\n  top: 40px;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background: #222;\n  z-index: 9000;\n  display: none;\n  visibility: hidden;\n  overflow-y: visible;\n  overflow-x: hidden;\n}\n.captureListComponent.active {\n  display: block;\n  visibility: visible;\n}\n.captureListComponent .openCaptureFile {\n  border: 1px dashed #f9f9f9;\n  display: block;\n  margin: 5px;\n  padding: 5px;\n  text-align: center;\n  font-style: italic;\n}\n.captureListComponent .openCaptureFile span {\n  line-height: 100%;\n  vertical-align: middle;\n}\n.captureListComponent ul {\n  margin: 0px;\n  padding: 0px;\n  list-style: none;\n  display: -webkit-box;\n  display: -moz-box;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-flex-flow: row wrap;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n}\n.captureListComponent ul li {\n  margin: 5px;\n  border: 1px solid #606060;\n}\n.captureListComponent ul li img {\n  width: 295px;\n  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9));\n  background-image: -moz-linear-gradient(45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(-45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(45deg, transparent 75%, #d9d9d9 75%), -moz-linear-gradient(-45deg, transparent 75%, #d9d9d9 75%);\n  -webkit-background-size: 50px 51px;\n  -moz-background-size: 50px 50px;\n  background-size: 50px 50px;\n  background-position: 0 0, 25px 0, 25px -25px, 0px 25px;\n  display: block;\n}\n.captureListComponent ul li span {\n  display: block;\n  text-align: center;\n  border: 5px solid #222;\n}\n.captureListComponent ul li span .captureListItemSave {\n  color: #f9f9f9;\n  font-size: 16px;\n  margin-left: 10px;\n  position: relative;\n  padding: 3px 8px 3px 32px;\n}\n.captureListComponent ul li span .captureListItemSave:before, .captureListComponent ul li span .captureListItemSave:after {\n  box-sizing: border-box;\n  content: \"\";\n  position: absolute;\n}\n.captureListComponent ul li span .captureListItemSave:before {\n  background: #d9d9d9;\n  border-color: #f9f9f9;\n  border-style: solid;\n  border-width: 7px 2px 1px;\n  border-radius: 1px;\n  height: 16px;\n  left: 8px;\n  top: 5px;\n  width: 16px;\n}\n.captureListComponent ul li span .captureListItemSave:after {\n  background: #f9f9f9;\n  border-color: #d9d9d9;\n  border-style: solid;\n  border-width: 1px 1px 1px 4px;\n  height: 5px;\n  left: 13px;\n  top: 5px;\n  width: 7px;\n}\n.captureListComponent ul li:hover {\n  cursor: pointer;\n}\n.captureListComponent ul li.active span {\n  background: #F0640D;\n  border: 5px solid #F0640D;\n}\n.captureListComponent ul li.active span .captureListItemSave:before {\n  background: #F0640D;\n}\n.captureListComponent ul li.active span .captureListItemSave:after {\n  border-color: #F0640D;\n}\n\n.visualStateListComponent {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  padding: 5px;\n  right: 80%;\n  overflow-y: visible;\n  overflow-x: hidden;\n}\n.visualStateListComponent ul {\n  margin: 0px;\n  padding: 0px;\n  list-style: none;\n}\n.visualStateListComponent ul li {\n  margin: 20px 15px 0px 15px;\n  border: 1px solid #606060;\n}\n.visualStateListComponent ul li img {\n  display: block;\n  padding: 0px;\n  box-sizing: border-box;\n  max-height: 600px;\n  width: 100%;\n  margin: 0 auto;\n  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9));\n  background-image: -moz-linear-gradient(45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(-45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(45deg, transparent 75%, #d9d9d9 75%), -moz-linear-gradient(-45deg, transparent 75%, #d9d9d9 75%);\n  -webkit-background-size: 50px 51px;\n  -moz-background-size: 50px 50px;\n  background-size: 50px 50px;\n  background-position: 0 0, 25px 0, 25px -25px, 0px 25px;\n}\n.visualStateListComponent ul li:hover {\n  cursor: pointer;\n}\n.visualStateListComponent ul li span {\n  border: 5px solid #222;\n  background: #222;\n  box-sizing: border-box;\n  display: inline-block;\n  width: 100%;\n  margin: 0px;\n  padding: 5px;\n  word-wrap: break-word;\n}\n.visualStateListComponent ul li.active {\n  border: 2px solid #F0640D;\n}\n\n.commandListComponent {\n  position: absolute;\n  top: 0;\n  left: 20%;\n  right: 40%;\n  bottom: 0;\n  color: lightgray;\n}\n.commandListComponent ul {\n  margin: 0px;\n  padding: 0px;\n  list-style: none;\n  overflow-y: visible;\n  overflow-x: hidden;\n  height: 100%;\n}\n.commandListComponent ul li {\n  padding: 8px;\n}\n.commandListComponent ul li span {\n  word-wrap: break-word;\n  line-height: 22px;\n}\n.commandListComponent ul li:hover {\n  color: #f9f9f9;\n  cursor: pointer;\n  transition: color 0.3s;\n  -webkit-transition: color 0.3s;\n  -moz-transition: color 0.3s;\n}\n.commandListComponent ul li:nth-child(even) {\n  background: #2c2c2c;\n}\n.commandListComponent ul li:nth-child(odd) {\n  background: #222;\n}\n.commandListComponent ul li .important {\n  font-weight: 800;\n}\n.commandListComponent ul li .important.deprecated {\n  color: red;\n}\n.commandListComponent ul li .important.unused {\n  color: yellow;\n}\n.commandListComponent ul li .important.disabled {\n  color: gray;\n}\n.commandListComponent ul li .important.redundant {\n  color: orange;\n}\n.commandListComponent ul li .important.valid {\n  color: greenyellow;\n}\n.commandListComponent ul li .marker {\n  font-size: 16px;\n  font-weight: 900;\n  color: greenyellow;\n}\n.commandListComponent ul li.active {\n  background: #f37628;\n  color: #222;\n}\n.commandListComponent ul li.drawCall {\n  background: #5db0d7;\n  color: #222;\n}\n.commandListComponent ul li a {\n  margin-left: 5px;\n  margin-right: 5px;\n  color: #5db0d7;\n  background: #222;\n  padding: 5px;\n  font-weight: 900;\n  display: inline-block;\n}\n\n.commandDetailComponent {\n  position: absolute;\n  top: 0;\n  left: 60%;\n  right: 0;\n  bottom: 0;\n  overflow-y: visible;\n  overflow-x: hidden;\n}\n\n.jsonGroupComponent {\n  display: block;\n  margin: 10px;\n  padding: 10px;\n  padding-bottom: 5px;\n}\n.jsonGroupComponent .jsonGroupComponentTitle {\n  display: block;\n  font-size: 16px;\n  color: #5db0d7;\n  border-bottom: 1px solid #5db0d7;\n  padding-bottom: 5px;\n  margin-bottom: 5px;\n  text-transform: capitalize;\n}\n.jsonGroupComponent ul {\n  margin: 0px;\n  padding: 0px;\n  list-style: none;\n}\n.jsonGroupComponent ul li:nth-child(even) {\n  background: #222;\n}\n.jsonGroupComponent ul li:nth-child(odd) {\n  background: #222;\n}\n\n.jsonItemComponentKey {\n  color: #F0640D;\n}\n\n.jsonItemComponentValue {\n  white-space: pre-wrap;\n}\n\n.jsonItemImageHolder {\n  width: 50%;\n  margin: auto;\n}\n.jsonItemImageHolder .jsonItemImage {\n  margin: 5px;\n  display: block;\n  border: 1px solid #606060;\n  width: 100%;\n}\n.jsonItemImageHolder .jsonItemImage img {\n  width: 100%;\n  display: block;\n  margin: auto;\n  max-width: 256px;\n  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9));\n  background-image: -moz-linear-gradient(45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(-45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(45deg, transparent 75%, #d9d9d9 75%), -moz-linear-gradient(-45deg, transparent 75%, #d9d9d9 75%);\n  -webkit-background-size: 50px 51px;\n  -moz-background-size: 50px 50px;\n  background-size: 50px 50px;\n  background-position: 0 0, 25px 0, 25px -25px, 0px 25px;\n}\n.jsonItemImageHolder .jsonItemImage span {\n  margin: 0px;\n  padding: 5px;\n  word-wrap: break-word;\n  display: inline-block;\n  width: 100%;\n  box-sizing: border-box;\n}\n\n[commandName=onOpenSourceClicked]:hover {\n  color: #f9f9f9;\n  cursor: pointer;\n  transition: color 0.3s;\n  -webkit-transition: color 0.3s;\n  -moz-transition: color 0.3s;\n}\n\n.jsonVisualStateItemComponent {\n  text-align: center;\n  padding: 10px;\n}\n.jsonVisualStateItemComponent img {\n  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9));\n  background-image: -moz-linear-gradient(45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(-45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(45deg, transparent 75%, #d9d9d9 75%), -moz-linear-gradient(-45deg, transparent 75%, #d9d9d9 75%);\n  -webkit-background-size: 50px 51px;\n  -moz-background-size: 50px 50px;\n  background-size: 50px 50px;\n  background-position: 0 0, 25px 0, 25px -25px, 0px 25px;\n  border: 1px solid #606060;\n  margin: 5px;\n  width: 100%;\n  max-width: 512px;\n  max-height: 800px;\n}\n.jsonVisualStateItemComponent span {\n  display: block;\n}\n\n.jsonContentComponent {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  padding: 10px;\n  overflow-y: visible;\n  overflow-x: hidden;\n}\n\n.jsonItemComponentValue {\n  word-break: break-all;\n  white-space: normal;\n}\n\n.jsonSourceItemComponentOpen {\n  font-weight: bold;\n  color: #5db0d7;\n  text-decoration: underline;\n}\n\n.sourceCodeMenuComponentContainer {\n  position: absolute;\n  left: 0;\n  top: 0;\n  bottom: 48px;\n  right: 40%;\n}\n\n.sourceCodeMenuComponentFooter {\n  position: absolute;\n  left: 0;\n  right: 40%;\n  bottom: 0;\n  padding: 0 15px;\n}\n\n.sourceCodeMenuComponent {\n  font-family: \"Montserrat\", sans-serif;\n  font-size: 13px;\n  font-weight: 300;\n  line-height: 40px;\n  flex: 1 100%;\n  display: flex;\n  flex-flow: row wrap;\n  height: 42px;\n  outline: 0 none;\n  border-bottom: 2px solid #222;\n  box-sizing: border-box;\n  list-style: none;\n  margin: 0;\n  background: #2c2c2c;\n  display: -webkit-box;\n  display: -moz-box;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-flex-flow: row wrap;\n  flex-flow: row wrap;\n  justify-content: flex-end;\n}\n.sourceCodeMenuComponent .resultViewMenuOpen {\n  display: none;\n  visibility: hidden;\n}\n.sourceCodeMenuComponent a {\n  outline: 0 none;\n  text-decoration: none;\n  display: block;\n  padding: 0 20px 0 20px;\n  color: #cccccc;\n  background: #2c2c2c;\n  box-sizing: border-box;\n  height: 100%;\n}\n.sourceCodeMenuComponent a.active {\n  background: #222;\n  color: white;\n  font-weight: 400;\n  border-bottom: 2px solid #F0640D;\n}\n.sourceCodeMenuComponent a:hover {\n  background: #222;\n  color: #c9c9c9;\n  cursor: pointer;\n  transition: color 0.3s;\n  -webkit-transition: color 0.3s;\n  -moz-transition: color 0.3s;\n}\n.sourceCodeMenuComponent a:hover.active {\n  color: #F0640D;\n  transition: color 0;\n  -webkit-transition: color 0;\n  -moz-transition: color 0;\n}\n.sourceCodeMenuComponent a.clearSearch {\n  display: inline-block;\n  padding: 0px;\n  margin-left: -30px;\n  margin-right: 20px;\n  z-index: 9000;\n  color: #f9f9f9;\n}\n.sourceCodeMenuComponent a.clearSearch:hover {\n  background: #2c2c2c;\n  color: #F0640D;\n}\n.sourceCodeMenuComponent input {\n  border: 0;\n  font-family: \"Montserrat\", sans-serif;\n  font-weight: 300;\n  padding: 0 20px 0 20px;\n  background: #464646;\n  color: #f9f9f9;\n  height: 100%;\n  position: relative;\n  top: -1px;\n  box-sizing: border-box;\n}\n.sourceCodeMenuComponent input:focus {\n  border: 0;\n  outline: 0 none;\n}\n.sourceCodeMenuComponent .clearSearch {\n  position: relative;\n  background: transparent;\n  display: inline;\n  padding: 0px;\n  margin-left: -30px;\n  z-index: 9000;\n  color: #F0640D;\n}\n.sourceCodeMenuComponent .clearSearch:hover {\n  background: transparent !important;\n}\n.sourceCodeMenuComponent ::-webkit-input-placeholder { /* WebKit, Blink, Edge */\n  color: #cccccc;\n}\n.sourceCodeMenuComponent :-moz-placeholder { /* Mozilla Firefox 4 to 18 */\n  color: #cccccc;\n}\n.sourceCodeMenuComponent ::-moz-placeholder { /* Mozilla Firefox 19+ */\n  color: #cccccc;\n}\n.sourceCodeMenuComponent :-ms-input-placeholder { /* Internet Explorer 10-11 */\n  color: #cccccc;\n}\n\n.sourceCodeComponent {\n  position: absolute;\n  top: 42px;\n  left: 0;\n  bottom: 48px;\n  right: 40%;\n  background: #222;\n  z-index: 9000;\n  overflow-x: visible;\n  overflow: auto;\n}\n.sourceCodeComponent .sourceCodeComponentTitle {\n  font-size: 16px;\n  font-weight: 800;\n  line-height: 50px;\n  color: #F0640D;\n  padding: 1em;\n  margin: 0.5em 0;\n}", "",{"version":3,"sources":["webpack://./src/embeddedFrontend/styles/resultView.scss","webpack://./src/embeddedFrontend/styles/_main.scss"],"names":[],"mappings":"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","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "/* The main window */\n.resultViewComponent {\n  position: absolute;\n  z-index: 99999;\n  border: 1px solid black;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background-color: #222;\n  opacity: 1;\n  visibility: hidden;\n  display: none;\n  color: #f9f9f9;\n  font-family: Consolas, monaco, monospace;\n  font-size: 14px;\n  font-weight: 500;\n}\n.resultViewComponent.active {\n  visibility: visible;\n  display: block;\n}\n.resultViewComponent, .resultViewComponent:after, .resultViewComponent:before {\n  box-sizing: content-box;\n}\n\n.resultViewMenuComponent {\n  font-family: \"Montserrat\", sans-serif;\n  font-size: 13px;\n  font-weight: 300;\n  line-height: 40px;\n  flex: 1 100%;\n  display: flex;\n  flex-flow: row wrap;\n  height: 42px;\n  outline: 0 none;\n  border-bottom: 2px solid #222;\n  box-sizing: border-box;\n  list-style: none;\n  margin: 0;\n  background: #2c2c2c;\n  display: -webkit-box;\n  display: -moz-box;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-flex-flow: row wrap;\n  flex-flow: row wrap;\n  justify-content: flex-end;\n}\n.resultViewMenuComponent .resultViewMenuOpen {\n  display: none;\n  visibility: hidden;\n}\n.resultViewMenuComponent a {\n  outline: 0 none;\n  text-decoration: none;\n  display: block;\n  padding: 0 20px 0 20px;\n  color: #cccccc;\n  background: #2c2c2c;\n  box-sizing: border-box;\n  height: 100%;\n}\n.resultViewMenuComponent a.active {\n  background: #222;\n  color: white;\n  font-weight: 400;\n  border-bottom: 2px solid #F0640D;\n}\n.resultViewMenuComponent a:hover {\n  background: #222;\n  color: #c9c9c9;\n  cursor: pointer;\n  transition: color 0.3s;\n  -webkit-transition: color 0.3s;\n  -moz-transition: color 0.3s;\n}\n.resultViewMenuComponent a:hover.active {\n  color: #F0640D;\n  transition: color 0;\n  -webkit-transition: color 0;\n  -moz-transition: color 0;\n}\n.resultViewMenuComponent a.clearSearch {\n  padding: 0px;\n  margin-left: -30px;\n  margin-right: 20px;\n  z-index: 9000;\n  color: #f9f9f9;\n}\n.resultViewMenuComponent a.clearSearch:hover {\n  background: #2c2c2c;\n  color: #F0640D;\n}\n@media all and (max-width: 1024px) {\n  .resultViewMenuComponent {\n    padding: 0px;\n    position: absolute;\n    overflow-y: visible;\n    top: 0px;\n    left: 0px;\n    right: 0px;\n    bottom: 0px;\n    z-index: 999999;\n    display: block;\n  }\n  .resultViewMenuComponent .resultViewMenuOpen {\n    display: block;\n    visibility: visible;\n  }\n  .resultViewMenuComponent li:not(.resultViewMenuSmall) {\n    display: none;\n    visibility: hidden;\n  }\n  .resultViewMenuComponent li {\n    background: #2c2c2c;\n  }\n  .resultViewMenuComponent li.searchContainer {\n    background: #464646;\n  }\n  .resultViewMenuComponent a.active {\n    background: #2c2c2c;\n  }\n}\n.resultViewMenuComponent input {\n  border: 0;\n  font-family: \"Montserrat\", sans-serif;\n  font-weight: 300;\n  padding: 0 20px 0 20px;\n  background: #464646;\n  color: #f9f9f9;\n  height: 40px;\n  position: relative;\n  top: -1px;\n  box-sizing: border-box;\n}\n.resultViewMenuComponent input:focus {\n  border: 0;\n  outline: 0 none;\n}\n.resultViewMenuComponent .clearSearch {\n  position: relative;\n  background: transparent;\n  display: inline;\n  padding: 0px;\n  margin-left: -30px;\n  z-index: 9000;\n  color: #F0640D;\n}\n.resultViewMenuComponent .clearSearch:hover {\n  background: transparent !important;\n}\n.resultViewMenuComponent ::-webkit-input-placeholder { /* WebKit, Blink, Edge */\n  color: #cccccc;\n}\n.resultViewMenuComponent :-moz-placeholder { /* Mozilla Firefox 4 to 18 */\n  color: #cccccc;\n}\n.resultViewMenuComponent ::-moz-placeholder { /* Mozilla Firefox 19+ */\n  color: #cccccc;\n}\n.resultViewMenuComponent :-ms-input-placeholder { /* Internet Explorer 10-11 */\n  color: #cccccc;\n}\n\n.resultViewContentComponent {\n  position: absolute;\n  top: 40px;\n  left: 0;\n  bottom: 0;\n  right: 0;\n}\n\n.informationColumnLeftComponent {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 50%;\n  overflow: auto;\n  overflow-x: hidden;\n  overflow-y: visible;\n}\n\n.informationColumnRightComponent {\n  position: absolute;\n  top: 0;\n  left: 50%;\n  bottom: 0;\n  right: 0;\n  overflow: auto;\n  overflow-x: hidden;\n  overflow-y: visible;\n}\n\n.captureListComponent {\n  position: absolute;\n  top: 40px;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  background: #222;\n  z-index: 9000;\n  display: none;\n  visibility: hidden;\n  overflow-y: visible;\n  overflow-x: hidden;\n}\n.captureListComponent.active {\n  display: block;\n  visibility: visible;\n}\n.captureListComponent .openCaptureFile {\n  border: 1px dashed #f9f9f9;\n  display: block;\n  margin: 5px;\n  padding: 5px;\n  text-align: center;\n  font-style: italic;\n}\n.captureListComponent .openCaptureFile span {\n  line-height: 100%;\n  vertical-align: middle;\n}\n.captureListComponent ul {\n  margin: 0px;\n  padding: 0px;\n  list-style: none;\n  display: -webkit-box;\n  display: -moz-box;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-flex-flow: row wrap;\n  flex-flow: row wrap;\n  justify-content: flex-start;\n}\n.captureListComponent ul li {\n  margin: 5px;\n  border: 1px solid #606060;\n}\n.captureListComponent ul li img {\n  width: 295px;\n  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9));\n  background-image: -moz-linear-gradient(45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(-45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(45deg, transparent 75%, #d9d9d9 75%), -moz-linear-gradient(-45deg, transparent 75%, #d9d9d9 75%);\n  -webkit-background-size: 50px 51px;\n  -moz-background-size: 50px 50px;\n  background-size: 50px 50px;\n  background-position: 0 0, 25px 0, 25px -25px, 0px 25px;\n  display: block;\n}\n.captureListComponent ul li span {\n  display: block;\n  text-align: center;\n  border: 5px solid #222;\n}\n.captureListComponent ul li span .captureListItemSave {\n  color: #f9f9f9;\n  font-size: 16px;\n  margin-left: 10px;\n  position: relative;\n  padding: 3px 8px 3px 32px;\n}\n.captureListComponent ul li span .captureListItemSave:before, .captureListComponent ul li span .captureListItemSave:after {\n  box-sizing: border-box;\n  content: \"\";\n  position: absolute;\n}\n.captureListComponent ul li span .captureListItemSave:before {\n  background: #d9d9d9;\n  border-color: #f9f9f9;\n  border-style: solid;\n  border-width: 7px 2px 1px;\n  border-radius: 1px;\n  height: 16px;\n  left: 8px;\n  top: 5px;\n  width: 16px;\n}\n.captureListComponent ul li span .captureListItemSave:after {\n  background: #f9f9f9;\n  border-color: #d9d9d9;\n  border-style: solid;\n  border-width: 1px 1px 1px 4px;\n  height: 5px;\n  left: 13px;\n  top: 5px;\n  width: 7px;\n}\n.captureListComponent ul li:hover {\n  cursor: pointer;\n}\n.captureListComponent ul li.active span {\n  background: #F0640D;\n  border: 5px solid #F0640D;\n}\n.captureListComponent ul li.active span .captureListItemSave:before {\n  background: #F0640D;\n}\n.captureListComponent ul li.active span .captureListItemSave:after {\n  border-color: #F0640D;\n}\n\n.visualStateListComponent {\n  position: absolute;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  padding: 5px;\n  right: 80%;\n  overflow-y: visible;\n  overflow-x: hidden;\n}\n.visualStateListComponent ul {\n  margin: 0px;\n  padding: 0px;\n  list-style: none;\n}\n.visualStateListComponent ul li {\n  margin: 20px 15px 0px 15px;\n  border: 1px solid #606060;\n}\n.visualStateListComponent ul li img {\n  display: block;\n  padding: 0px;\n  box-sizing: border-box;\n  max-height: 600px;\n  width: 100%;\n  margin: 0 auto;\n  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9));\n  background-image: -moz-linear-gradient(45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(-45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(45deg, transparent 75%, #d9d9d9 75%), -moz-linear-gradient(-45deg, transparent 75%, #d9d9d9 75%);\n  -webkit-background-size: 50px 51px;\n  -moz-background-size: 50px 50px;\n  background-size: 50px 50px;\n  background-position: 0 0, 25px 0, 25px -25px, 0px 25px;\n}\n.visualStateListComponent ul li:hover {\n  cursor: pointer;\n}\n.visualStateListComponent ul li span {\n  border: 5px solid #222;\n  background: #222;\n  box-sizing: border-box;\n  display: inline-block;\n  width: 100%;\n  margin: 0px;\n  padding: 5px;\n  word-wrap: break-word;\n}\n.visualStateListComponent ul li.active {\n  border: 2px solid #F0640D;\n}\n\n.commandListComponent {\n  position: absolute;\n  top: 0;\n  left: 20%;\n  right: 40%;\n  bottom: 0;\n  color: lightgray;\n}\n.commandListComponent ul {\n  margin: 0px;\n  padding: 0px;\n  list-style: none;\n  overflow-y: visible;\n  overflow-x: hidden;\n  height: 100%;\n}\n.commandListComponent ul li {\n  padding: 8px;\n}\n.commandListComponent ul li span {\n  word-wrap: break-word;\n  line-height: 22px;\n}\n.commandListComponent ul li:hover {\n  color: #f9f9f9;\n  cursor: pointer;\n  transition: color 0.3s;\n  -webkit-transition: color 0.3s;\n  -moz-transition: color 0.3s;\n}\n.commandListComponent ul li:nth-child(even) {\n  background: #2c2c2c;\n}\n.commandListComponent ul li:nth-child(odd) {\n  background: #222;\n}\n.commandListComponent ul li .important {\n  font-weight: 800;\n}\n.commandListComponent ul li .important.deprecated {\n  color: red;\n}\n.commandListComponent ul li .important.unused {\n  color: yellow;\n}\n.commandListComponent ul li .important.disabled {\n  color: gray;\n}\n.commandListComponent ul li .important.redundant {\n  color: orange;\n}\n.commandListComponent ul li .important.valid {\n  color: greenyellow;\n}\n.commandListComponent ul li .marker {\n  font-size: 16px;\n  font-weight: 900;\n  color: greenyellow;\n}\n.commandListComponent ul li.active {\n  background: #f37628;\n  color: #222;\n}\n.commandListComponent ul li.drawCall {\n  background: #5db0d7;\n  color: #222;\n}\n.commandListComponent ul li a {\n  margin-left: 5px;\n  margin-right: 5px;\n  color: #5db0d7;\n  background: #222;\n  padding: 5px;\n  font-weight: 900;\n  display: inline-block;\n}\n\n.commandDetailComponent {\n  position: absolute;\n  top: 0;\n  left: 60%;\n  right: 0;\n  bottom: 0;\n  overflow-y: visible;\n  overflow-x: hidden;\n}\n\n.jsonGroupComponent {\n  display: block;\n  margin: 10px;\n  padding: 10px;\n  padding-bottom: 5px;\n}\n.jsonGroupComponent .jsonGroupComponentTitle {\n  display: block;\n  font-size: 16px;\n  color: #5db0d7;\n  border-bottom: 1px solid #5db0d7;\n  padding-bottom: 5px;\n  margin-bottom: 5px;\n  text-transform: capitalize;\n}\n.jsonGroupComponent ul {\n  margin: 0px;\n  padding: 0px;\n  list-style: none;\n}\n.jsonGroupComponent ul li:nth-child(even) {\n  background: #222;\n}\n.jsonGroupComponent ul li:nth-child(odd) {\n  background: #222;\n}\n\n.jsonItemComponentKey {\n  color: #F0640D;\n}\n\n.jsonItemComponentValue {\n  white-space: pre-wrap;\n}\n\n.jsonItemImageHolder {\n  width: 50%;\n  margin: auto;\n}\n.jsonItemImageHolder .jsonItemImage {\n  margin: 5px;\n  display: block;\n  border: 1px solid #606060;\n  width: 100%;\n}\n.jsonItemImageHolder .jsonItemImage img {\n  width: 100%;\n  display: block;\n  margin: auto;\n  max-width: 256px;\n  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9));\n  background-image: -moz-linear-gradient(45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(-45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(45deg, transparent 75%, #d9d9d9 75%), -moz-linear-gradient(-45deg, transparent 75%, #d9d9d9 75%);\n  -webkit-background-size: 50px 51px;\n  -moz-background-size: 50px 50px;\n  background-size: 50px 50px;\n  background-position: 0 0, 25px 0, 25px -25px, 0px 25px;\n}\n.jsonItemImageHolder .jsonItemImage span {\n  margin: 0px;\n  padding: 5px;\n  word-wrap: break-word;\n  display: inline-block;\n  width: 100%;\n  box-sizing: border-box;\n}\n\n[commandName=onOpenSourceClicked]:hover {\n  color: #f9f9f9;\n  cursor: pointer;\n  transition: color 0.3s;\n  -webkit-transition: color 0.3s;\n  -moz-transition: color 0.3s;\n}\n\n.jsonVisualStateItemComponent {\n  text-align: center;\n  padding: 10px;\n}\n.jsonVisualStateItemComponent img {\n  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.25, #c9c9c9), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.75, transparent), color-stop(0.75, #c9c9c9));\n  background-image: -moz-linear-gradient(45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(-45deg, #d9d9d9 25%, transparent 25%), -moz-linear-gradient(45deg, transparent 75%, #d9d9d9 75%), -moz-linear-gradient(-45deg, transparent 75%, #d9d9d9 75%);\n  -webkit-background-size: 50px 51px;\n  -moz-background-size: 50px 50px;\n  background-size: 50px 50px;\n  background-position: 0 0, 25px 0, 25px -25px, 0px 25px;\n  border: 1px solid #606060;\n  margin: 5px;\n  width: 100%;\n  max-width: 512px;\n  max-height: 800px;\n}\n.jsonVisualStateItemComponent span {\n  display: block;\n}\n\n.jsonContentComponent {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  padding: 10px;\n  overflow-y: visible;\n  overflow-x: hidden;\n}\n\n.jsonItemComponentValue {\n  word-break: break-all;\n  white-space: normal;\n}\n\n.jsonSourceItemComponentOpen {\n  font-weight: bold;\n  color: #5db0d7;\n  text-decoration: underline;\n}\n\n.sourceCodeMenuComponentContainer {\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 40%;\n}\n\n.sourceCodeMenuComponent {\n  font-family: \"Montserrat\", sans-serif;\n  font-size: 13px;\n  font-weight: 300;\n  line-height: 40px;\n  flex: 1 100%;\n  display: flex;\n  flex-flow: row wrap;\n  height: 42px;\n  outline: 0 none;\n  border-bottom: 2px solid #222;\n  box-sizing: border-box;\n  list-style: none;\n  margin: 0;\n  background: #2c2c2c;\n  display: -webkit-box;\n  display: -moz-box;\n  display: -ms-flexbox;\n  display: -webkit-flex;\n  display: flex;\n  -webkit-flex-flow: row wrap;\n  flex-flow: row wrap;\n  justify-content: flex-end;\n}\n.sourceCodeMenuComponent .resultViewMenuOpen {\n  display: none;\n  visibility: hidden;\n}\n.sourceCodeMenuComponent a {\n  outline: 0 none;\n  text-decoration: none;\n  display: block;\n  padding: 0 20px 0 20px;\n  color: #cccccc;\n  background: #2c2c2c;\n  box-sizing: border-box;\n  height: 100%;\n}\n.sourceCodeMenuComponent a.active {\n  background: #222;\n  color: white;\n  font-weight: 400;\n  border-bottom: 2px solid #F0640D;\n}\n.sourceCodeMenuComponent a:hover {\n  background: #222;\n  color: #c9c9c9;\n  cursor: pointer;\n  transition: color 0.3s;\n  -webkit-transition: color 0.3s;\n  -moz-transition: color 0.3s;\n}\n.sourceCodeMenuComponent a:hover.active {\n  color: #F0640D;\n  transition: color 0;\n  -webkit-transition: color 0;\n  -moz-transition: color 0;\n}\n.sourceCodeMenuComponent a.clearSearch {\n  display: inline-block;\n  padding: 0px;\n  margin-left: -30px;\n  margin-right: 20px;\n  z-index: 9000;\n  color: #f9f9f9;\n}\n.sourceCodeMenuComponent a.clearSearch:hover {\n  background: #2c2c2c;\n  color: #F0640D;\n}\n.sourceCodeMenuComponent input {\n  border: 0;\n  font-family: \"Montserrat\", sans-serif;\n  font-weight: 300;\n  padding: 0 20px 0 20px;\n  background: #464646;\n  color: #f9f9f9;\n  height: 100%;\n  position: relative;\n  top: -1px;\n  box-sizing: border-box;\n}\n.sourceCodeMenuComponent input:focus {\n  border: 0;\n  outline: 0 none;\n}\n.sourceCodeMenuComponent .clearSearch {\n  position: relative;\n  background: transparent;\n  display: inline;\n  padding: 0px;\n  margin-left: -30px;\n  z-index: 9000;\n  color: #F0640D;\n}\n.sourceCodeMenuComponent .clearSearch:hover {\n  background: transparent !important;\n}\n.sourceCodeMenuComponent ::-webkit-input-placeholder { /* WebKit, Blink, Edge */\n  color: #cccccc;\n}\n.sourceCodeMenuComponent :-moz-placeholder { /* Mozilla Firefox 4 to 18 */\n  color: #cccccc;\n}\n.sourceCodeMenuComponent ::-moz-placeholder { /* Mozilla Firefox 19+ */\n  color: #cccccc;\n}\n.sourceCodeMenuComponent :-ms-input-placeholder { /* Internet Explorer 10-11 */\n  color: #cccccc;\n}\n\n.sourceCodeComponent {\n  position: absolute;\n  top: 42px;\n  left: 0;\n  bottom: 0;\n  right: 40%;\n  background: #222;\n  z-index: 9000;\n  overflow-x: visible;\n  overflow: auto;\n}\n.sourceCodeComponent .sourceCodeComponentTitle {\n  font-size: 16px;\n  font-weight: 800;\n  line-height: 50px;\n  color: #F0640D;\n  padding: 1em;\n  margin: 0.5em 0;\n}", "",{"version":3,"sources":["webpack://./src/embeddedFrontend/styles/resultView.scss","webpack://./src/embeddedFrontend/styles/_main.scss"],"names":[],"mappings":"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","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1392,6 +1418,7 @@ exports.hasCssString = function(id, doc) {
 };
 
 exports.importCssString = function importCssString(cssText, id, target) {
+    if (window.wx != undefined) return;
     var container = target;
     if (!target || !target.getRootNode) {
         container = document;
@@ -22114,7 +22141,7 @@ options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWi
 options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
 options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_captureMenu_scss__WEBPACK_IMPORTED_MODULE_6__["default"], options);
+// var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_captureMenu_scss__WEBPACK_IMPORTED_MODULE_6__["default"], options);
 
 
 
@@ -23501,40 +23528,6 @@ DrawArraysInstancedAngle.commandName = "drawArraysInstancedANGLE";
 
 /***/ }),
 
-/***/ "./src/backend/commands/drawArraysInstancedBaseInstanceWEBGL.ts":
-/*!**********************************************************************!*\
-  !*** ./src/backend/commands/drawArraysInstancedBaseInstanceWEBGL.ts ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DrawArraysInstancedBaseInstanceWEBGL": () => (/* binding */ DrawArraysInstancedBaseInstanceWEBGL)
-/* harmony export */ });
-/* harmony import */ var _baseCommand__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./baseCommand */ "./src/backend/commands/baseCommand.ts");
-/* harmony import */ var _types_webglConstants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types/webglConstants */ "./src/backend/types/webglConstants.ts");
-
-
-class DrawArraysInstancedBaseInstanceWEBGL extends _baseCommand__WEBPACK_IMPORTED_MODULE_0__.BaseCommand {
-    get spiedCommandName() {
-        return DrawArraysInstancedBaseInstanceWEBGL.commandName;
-    }
-    stringifyArgs(args) {
-        const stringified = [];
-        stringified.push(_types_webglConstants__WEBPACK_IMPORTED_MODULE_1__.WebGlConstants.stringifyWebGlConstant(args[0], "drawArraysInstanced"));
-        stringified.push(args[1]);
-        stringified.push(args[2]);
-        stringified.push(args[3]);
-        stringified.push(`baseInstance = ${args[4]}`);
-        return stringified;
-    }
-}
-DrawArraysInstancedBaseInstanceWEBGL.commandName = "drawArraysInstancedBaseInstanceWEBGL";
-
-
-/***/ }),
-
 /***/ "./src/backend/commands/drawElements.ts":
 /*!**********************************************!*\
   !*** ./src/backend/commands/drawElements.ts ***!
@@ -23632,42 +23625,6 @@ class DrawElementsInstancedAngle extends _baseCommand__WEBPACK_IMPORTED_MODULE_0
     }
 }
 DrawElementsInstancedAngle.commandName = "drawElementsInstancedANGLE";
-
-
-/***/ }),
-
-/***/ "./src/backend/commands/drawElementsInstancedBaseVertexBaseInstanceWEBGL.ts":
-/*!**********************************************************************************!*\
-  !*** ./src/backend/commands/drawElementsInstancedBaseVertexBaseInstanceWEBGL.ts ***!
-  \**********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DrawElementsInstancedBaseVertexBaseInstanceWEBGL": () => (/* binding */ DrawElementsInstancedBaseVertexBaseInstanceWEBGL)
-/* harmony export */ });
-/* harmony import */ var _baseCommand__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./baseCommand */ "./src/backend/commands/baseCommand.ts");
-/* harmony import */ var _types_webglConstants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types/webglConstants */ "./src/backend/types/webglConstants.ts");
-
-
-class DrawElementsInstancedBaseVertexBaseInstanceWEBGL extends _baseCommand__WEBPACK_IMPORTED_MODULE_0__.BaseCommand {
-    get spiedCommandName() {
-        return DrawElementsInstancedBaseVertexBaseInstanceWEBGL.commandName;
-    }
-    stringifyArgs(args) {
-        const stringified = [];
-        stringified.push(_types_webglConstants__WEBPACK_IMPORTED_MODULE_1__.WebGlConstants.stringifyWebGlConstant(args[0], "drawElementsInstanced"));
-        stringified.push(args[1]);
-        stringified.push(_types_webglConstants__WEBPACK_IMPORTED_MODULE_1__.WebGlConstants.stringifyWebGlConstant(args[2], "drawElementsInstanced"));
-        stringified.push(args[3]);
-        stringified.push(args[4]);
-        stringified.push(`baseVertex = ${args[5]}`);
-        stringified.push(`baseInstance = ${args[6]}`);
-        return stringified;
-    }
-}
-DrawElementsInstancedBaseVertexBaseInstanceWEBGL.commandName = "drawElementsInstancedBaseVertexBaseInstanceWEBGL";
 
 
 /***/ }),
@@ -25043,18 +25000,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _commands_MultiDrawElementsInstancedBaseVertexBaseInstanceWEBGL__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../commands/MultiDrawElementsInstancedBaseVertexBaseInstanceWEBGL */ "./src/backend/commands/MultiDrawElementsInstancedBaseVertexBaseInstanceWEBGL.ts");
 /* harmony import */ var _commands_MultiDrawElementsInstancedWEBGL__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../commands/MultiDrawElementsInstancedWEBGL */ "./src/backend/commands/MultiDrawElementsInstancedWEBGL.ts");
 /* harmony import */ var _commands_MultiDrawElementsWEBGL__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../commands/MultiDrawElementsWEBGL */ "./src/backend/commands/MultiDrawElementsWEBGL.ts");
-/* harmony import */ var _commands_drawArraysInstancedBaseInstanceWEBGL__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../commands/drawArraysInstancedBaseInstanceWEBGL */ "./src/backend/commands/drawArraysInstancedBaseInstanceWEBGL.ts");
-/* harmony import */ var _commands_drawElementsInstancedBaseVertexBaseInstanceWEBGL__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../commands/drawElementsInstancedBaseVertexBaseInstanceWEBGL */ "./src/backend/commands/drawElementsInstancedBaseVertexBaseInstanceWEBGL.ts");
-/* harmony import */ var _commands_scissor__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../commands/scissor */ "./src/backend/commands/scissor.ts");
-/* harmony import */ var _commands_stencilMask__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../commands/stencilMask */ "./src/backend/commands/stencilMask.ts");
-/* harmony import */ var _commands_stencilMaskSeparate__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../commands/stencilMaskSeparate */ "./src/backend/commands/stencilMaskSeparate.ts");
-/* harmony import */ var _commands_stencilFunc__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../commands/stencilFunc */ "./src/backend/commands/stencilFunc.ts");
-/* harmony import */ var _commands_stencilFuncSeparate__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../commands/stencilFuncSeparate */ "./src/backend/commands/stencilFuncSeparate.ts");
-/* harmony import */ var _commands_vertexAttribPointer__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../commands/vertexAttribPointer */ "./src/backend/commands/vertexAttribPointer.ts");
-/* harmony import */ var _commands_viewport__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../commands/viewport */ "./src/backend/commands/viewport.ts");
-/* harmony import */ var _commands_enableVertexAttribArray__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../commands/enableVertexAttribArray */ "./src/backend/commands/enableVertexAttribArray.ts");
-
-
+/* harmony import */ var _commands_scissor__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../commands/scissor */ "./src/backend/commands/scissor.ts");
+/* harmony import */ var _commands_stencilMask__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../commands/stencilMask */ "./src/backend/commands/stencilMask.ts");
+/* harmony import */ var _commands_stencilMaskSeparate__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../commands/stencilMaskSeparate */ "./src/backend/commands/stencilMaskSeparate.ts");
+/* harmony import */ var _commands_stencilFunc__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../commands/stencilFunc */ "./src/backend/commands/stencilFunc.ts");
+/* harmony import */ var _commands_stencilFuncSeparate__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../commands/stencilFuncSeparate */ "./src/backend/commands/stencilFuncSeparate.ts");
+/* harmony import */ var _commands_vertexAttribPointer__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../commands/vertexAttribPointer */ "./src/backend/commands/vertexAttribPointer.ts");
+/* harmony import */ var _commands_viewport__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../commands/viewport */ "./src/backend/commands/viewport.ts");
+/* harmony import */ var _commands_enableVertexAttribArray__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../commands/enableVertexAttribArray */ "./src/backend/commands/enableVertexAttribArray.ts");
 
 
 
@@ -25177,16 +25130,14 @@ class CommandSpy {
             [_commands_MultiDrawElementsInstancedBaseVertexBaseInstanceWEBGL__WEBPACK_IMPORTED_MODULE_25__.MultiDrawElementsInstancedBaseVertexBaseInstanceWEBGL.commandName]: (options) => new _commands_MultiDrawElementsInstancedBaseVertexBaseInstanceWEBGL__WEBPACK_IMPORTED_MODULE_25__.MultiDrawElementsInstancedBaseVertexBaseInstanceWEBGL(options),
             [_commands_MultiDrawElementsInstancedWEBGL__WEBPACK_IMPORTED_MODULE_26__.MultiDrawElementsInstancedWEBGL.commandName]: (options) => new _commands_MultiDrawElementsInstancedWEBGL__WEBPACK_IMPORTED_MODULE_26__.MultiDrawElementsInstancedWEBGL(options),
             [_commands_MultiDrawElementsWEBGL__WEBPACK_IMPORTED_MODULE_27__.MultiDrawElementsWEBGL.commandName]: (options) => new _commands_MultiDrawElementsWEBGL__WEBPACK_IMPORTED_MODULE_27__.MultiDrawElementsWEBGL(options),
-            [_commands_drawArraysInstancedBaseInstanceWEBGL__WEBPACK_IMPORTED_MODULE_28__.DrawArraysInstancedBaseInstanceWEBGL.commandName]: (options) => new _commands_drawArraysInstancedBaseInstanceWEBGL__WEBPACK_IMPORTED_MODULE_28__.DrawArraysInstancedBaseInstanceWEBGL(options),
-            [_commands_drawElementsInstancedBaseVertexBaseInstanceWEBGL__WEBPACK_IMPORTED_MODULE_29__.DrawElementsInstancedBaseVertexBaseInstanceWEBGL.commandName]: (options) => new _commands_drawElementsInstancedBaseVertexBaseInstanceWEBGL__WEBPACK_IMPORTED_MODULE_29__.DrawElementsInstancedBaseVertexBaseInstanceWEBGL(options),
-            [_commands_scissor__WEBPACK_IMPORTED_MODULE_30__.Scissor.commandName]: (options) => new _commands_scissor__WEBPACK_IMPORTED_MODULE_30__.Scissor(options),
-            [_commands_stencilMask__WEBPACK_IMPORTED_MODULE_31__.StencilMask.commandName]: (options) => new _commands_stencilMask__WEBPACK_IMPORTED_MODULE_31__.StencilMask(options),
-            [_commands_stencilMaskSeparate__WEBPACK_IMPORTED_MODULE_32__.StencilMaskSeparate.commandName]: (options) => new _commands_stencilMaskSeparate__WEBPACK_IMPORTED_MODULE_32__.StencilMaskSeparate(options),
-            [_commands_stencilFunc__WEBPACK_IMPORTED_MODULE_33__.StencilFunc.commandName]: (options) => new _commands_stencilFunc__WEBPACK_IMPORTED_MODULE_33__.StencilFunc(options),
-            [_commands_stencilFuncSeparate__WEBPACK_IMPORTED_MODULE_34__.StencilFuncSeparate.commandName]: (options) => new _commands_stencilFuncSeparate__WEBPACK_IMPORTED_MODULE_34__.StencilFuncSeparate(options),
-            [_commands_vertexAttribPointer__WEBPACK_IMPORTED_MODULE_35__.VertexAttribPointer.commandName]: (options) => new _commands_vertexAttribPointer__WEBPACK_IMPORTED_MODULE_35__.VertexAttribPointer(options),
-            [_commands_viewport__WEBPACK_IMPORTED_MODULE_36__.Viewport.commandName]: (options) => new _commands_viewport__WEBPACK_IMPORTED_MODULE_36__.Viewport(options),
-            [_commands_enableVertexAttribArray__WEBPACK_IMPORTED_MODULE_37__.EnableVertexAttribArray.commandName]: (options) => new _commands_enableVertexAttribArray__WEBPACK_IMPORTED_MODULE_37__.EnableVertexAttribArray(options),
+            [_commands_scissor__WEBPACK_IMPORTED_MODULE_28__.Scissor.commandName]: (options) => new _commands_scissor__WEBPACK_IMPORTED_MODULE_28__.Scissor(options),
+            [_commands_stencilMask__WEBPACK_IMPORTED_MODULE_29__.StencilMask.commandName]: (options) => new _commands_stencilMask__WEBPACK_IMPORTED_MODULE_29__.StencilMask(options),
+            [_commands_stencilMaskSeparate__WEBPACK_IMPORTED_MODULE_30__.StencilMaskSeparate.commandName]: (options) => new _commands_stencilMaskSeparate__WEBPACK_IMPORTED_MODULE_30__.StencilMaskSeparate(options),
+            [_commands_stencilFunc__WEBPACK_IMPORTED_MODULE_31__.StencilFunc.commandName]: (options) => new _commands_stencilFunc__WEBPACK_IMPORTED_MODULE_31__.StencilFunc(options),
+            [_commands_stencilFuncSeparate__WEBPACK_IMPORTED_MODULE_32__.StencilFuncSeparate.commandName]: (options) => new _commands_stencilFuncSeparate__WEBPACK_IMPORTED_MODULE_32__.StencilFuncSeparate(options),
+            [_commands_vertexAttribPointer__WEBPACK_IMPORTED_MODULE_33__.VertexAttribPointer.commandName]: (options) => new _commands_vertexAttribPointer__WEBPACK_IMPORTED_MODULE_33__.VertexAttribPointer(options),
+            [_commands_viewport__WEBPACK_IMPORTED_MODULE_34__.Viewport.commandName]: (options) => new _commands_viewport__WEBPACK_IMPORTED_MODULE_34__.Viewport(options),
+            [_commands_enableVertexAttribArray__WEBPACK_IMPORTED_MODULE_35__.EnableVertexAttribArray.commandName]: (options) => new _commands_enableVertexAttribArray__WEBPACK_IMPORTED_MODULE_35__.EnableVertexAttribArray(options),
         };
     }
 }
@@ -25780,130 +25731,6 @@ class WebGlObjectSpy {
     }
     initWebglObjects() {
         this.webGlObjects.push(new _webGlObjects_webGlObjects__WEBPACK_IMPORTED_MODULE_0__.Buffer(), new _webGlObjects_webGlObjects__WEBPACK_IMPORTED_MODULE_0__.FrameBuffer(), new _webGlObjects_webGlObjects__WEBPACK_IMPORTED_MODULE_0__.Program(), new _webGlObjects_webGlObjects__WEBPACK_IMPORTED_MODULE_0__.Query(), new _webGlObjects_webGlObjects__WEBPACK_IMPORTED_MODULE_0__.Renderbuffer(), new _webGlObjects_webGlObjects__WEBPACK_IMPORTED_MODULE_0__.Sampler(), new _webGlObjects_webGlObjects__WEBPACK_IMPORTED_MODULE_0__.Sync(), new _webGlObjects_webGlObjects__WEBPACK_IMPORTED_MODULE_0__.Texture(), new _webGlObjects_webGlObjects__WEBPACK_IMPORTED_MODULE_0__.TransformFeedback(), new _webGlObjects_webGlObjects__WEBPACK_IMPORTED_MODULE_0__.UniformLocation(), new _webGlObjects_webGlObjects__WEBPACK_IMPORTED_MODULE_0__.VertexArrayObject(), new _webGlObjects_webGlObjects__WEBPACK_IMPORTED_MODULE_0__.Shader());
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/backend/spies/xrSpy.ts":
-/*!************************************!*\
-  !*** ./src/backend/spies/xrSpy.ts ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "XRSpy": () => (/* binding */ XRSpy)
-/* harmony export */ });
-/* harmony import */ var _utils_originFunctionHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/originFunctionHelper */ "./src/backend/utils/originFunctionHelper.ts");
-/* harmony import */ var _timeSpy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./timeSpy */ "./src/backend/spies/timeSpy.ts");
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-
-
-// tslint:disable:max-classes-per-file
-class XRSpy {
-    constructor(timeSpy) {
-        this.timeSpy = timeSpy;
-        this.init();
-    }
-    spyXRSession(session) {
-        if (this.currentXRSession) {
-            this.unspyXRSession();
-        }
-        for (const Spy of _timeSpy__WEBPACK_IMPORTED_MODULE_1__.TimeSpy.getRequestAnimationFrameFunctionNames()) {
-            _utils_originFunctionHelper__WEBPACK_IMPORTED_MODULE_0__.OriginFunctionHelper.resetOriginFunction(this.timeSpy.getSpiedScope(), Spy);
-        }
-        this.timeSpy.spyRequestAnimationFrame("requestAnimationFrame", session);
-        this.currentXRSession = session;
-    }
-    unspyXRSession() {
-        if (!this.currentXRSession) {
-            return;
-        }
-        _utils_originFunctionHelper__WEBPACK_IMPORTED_MODULE_0__.OriginFunctionHelper.resetOriginFunction(this.currentXRSession, "requestAnimationFrame");
-        this.currentXRSession = undefined;
-        // listen to the regular frames again.
-        for (const Spy of _timeSpy__WEBPACK_IMPORTED_MODULE_1__.TimeSpy.getRequestAnimationFrameFunctionNames()) {
-            this.timeSpy.spyRequestAnimationFrame(Spy, this.timeSpy.getSpiedScope());
-        }
-    }
-    init() {
-        if (!navigator.xr) {
-            return;
-        }
-        // define XR Polyfills.
-        // we do them here in xrSpy.init so that we don't try to initialize them *unless* we are using WebXR,
-        // since not all browsers will support experimental WebXR APIs.
-        class XRWebGLLayerSpector extends XRWebGLLayer {
-            constructor(session, context, layerInit) {
-                super(session, context, layerInit);
-                this.glContext = context;
-            }
-            getContext() {
-                return this.glContext;
-            }
-        }
-        class XRWebGLBindingSpector extends XRWebGLBinding {
-            constructor(session, context) {
-                super(session, context);
-                this.glContext = context;
-            }
-            createProjectionLayer(init) {
-                const layer = super.createProjectionLayer(init);
-                layer.glContext = this.glContext;
-                return layer;
-            }
-        }
-        window.XRWebGLLayer = XRWebGLLayerSpector;
-        window.XRWebGLBinding = XRWebGLBindingSpector;
-        // polyfill request session so Spector gets access to the session object.
-        const existingRequestSession = navigator.xr.requestSession;
-        Object.defineProperty(navigator.xr, "requestSessionInternal", { writable: true });
-        navigator.xr.requestSessionInternal = existingRequestSession;
-        const newRequestSession = (sessionMode, sessionInit) => {
-            const modifiedSessionPromise = (mode, init) => {
-                return navigator.xr.requestSessionInternal(mode, init).then((session) => {
-                    // listen to the XR Session here! When we do that, we'll stop listening to window.requestAnimationFrame
-                    // and start listening to session.requestAnimationFrame
-                    // Feed the gl context through the session
-                    const spectorSession = session;
-                    spectorSession._updateRenderState = session.updateRenderState;
-                    spectorSession.updateRenderState = (renderStateInit) => __awaiter(this, void 0, void 0, function* () {
-                        if (renderStateInit.baseLayer) {
-                            const polyfilledBaseLayer = renderStateInit.baseLayer;
-                            spectorSession.glContext = polyfilledBaseLayer.getContext();
-                        }
-                        if (renderStateInit.layers) {
-                            for (const layer of renderStateInit.layers) {
-                                const layerAny = layer;
-                                if (layerAny.glContext) {
-                                    spectorSession.glContext = layerAny.glContext;
-                                }
-                            }
-                        }
-                        return spectorSession._updateRenderState(renderStateInit);
-                    });
-                    this.spyXRSession(spectorSession);
-                    session.addEventListener("end", () => {
-                        this.unspyXRSession();
-                    });
-                    return Promise.resolve(session);
-                });
-            };
-            return modifiedSessionPromise(sessionMode, sessionInit);
-        };
-        Object.defineProperty(navigator.xr, "requestSession", { writable: true });
-        navigator.xr.requestSession = newRequestSession;
     }
 }
 
@@ -27987,7 +27814,6 @@ class Extensions extends _baseState__WEBPACK_IMPORTED_MODULE_0__.BaseState {
                 // { name: "WEBGL_debug_shaders", description: "" },
                 { name: "WEBGL_multi_draw", description: "" },
                 { name: "WEBGL_multi_draw_instanced_base_vertex_base_instance", description: "" },
-                { name: "WEBGL_draw_instanced_base_vertex_base_instance", description: "" },
             ],
         ];
         this.currentState = this.startCapture(true, this.quickCapture, this.fullCapture);
@@ -28885,8 +28711,6 @@ const drawCommands = [
     "multiDrawElementsInstancedWEBGL",
     "multiDrawArraysInstancedBaseInstanceWEBGL",
     "multiDrawElementsInstancedBaseVertexBaseInstanceWEBGL",
-    "drawArraysInstancedBaseInstanceWEBGL",
-    "drawElementsInstancedBaseVertexBaseInstanceWEBGL"
 ];
 
 
@@ -29124,23 +28948,44 @@ class ReadPixelsHelper {
     static readPixels(gl, x, y, width, height, type) {
         // Empty error list.
         gl.getError();
+
         // If type is UNSIGNED_NORMALIZED, we passed in a component type that isn't a pixel format type.
         // So we have to convert it to a valid pixel format type.
         if (type === _types_webglConstants__WEBPACK_IMPORTED_MODULE_0__.WebGlConstants.UNSIGNED_NORMALIZED.value) {
             type = _types_webglConstants__WEBPACK_IMPORTED_MODULE_0__.WebGlConstants.UNSIGNED_BYTE.value;
         }
+
+        var curFbo = gl.getParameter(gl.FRAMEBUFFER_BINDING);
+        // if (!curFbo) {
+        //     type = _types_webglConstants__WEBPACK_IMPORTED_MODULE_0__.WebGlConstants.UNSIGNED_SHORT.value;
+        // }
+
         // prepare destination storage.
         const size = width * height * 4;
         let pixels;
         if (type === _types_webglConstants__WEBPACK_IMPORTED_MODULE_0__.WebGlConstants.UNSIGNED_BYTE.value) {
             pixels = new Uint8Array(size);
         }
+        else if (type === _types_webglConstants__WEBPACK_IMPORTED_MODULE_0__.WebGlConstants.UNSIGNED_SHORT.value) {
+            pixels = new Uint16Array(size);
+        }
         else {
             type = _types_webglConstants__WEBPACK_IMPORTED_MODULE_0__.WebGlConstants.FLOAT.value;
             pixels = new Float32Array(size);
         }
         // Read the pixels from the frame buffer.
-        gl.readPixels(x, y, width, height, gl.RGBA, type, pixels);
+
+        if (curFbo) {        
+            var curType = gl.getFramebufferAttachmentParameter(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE);
+            // console.log("readPixels2 type: " + type + "," + width + "," + height + ", format:" + gl.RGBA + ",curType:" + curType);
+            gl.readPixels(x, y, width, height, gl.RGBA, type, pixels);
+        }
+        else {
+            // WebGlConstants.BYTE
+            console.log("readPixels2 type: " + type + "," + width + "," + height + ", format:" + gl.RGBA + ",curType:" + curType);
+            var newType = type; // 5120; // WebGlConstants.BYTE
+            gl.readPixels(x, y, width, height, gl.RGBA, newType, pixels);
+        }
         if (gl.getError()) {
             return undefined;
         }
@@ -29218,8 +29063,13 @@ class ReadProgramHelper {
     }
     static readShaderFromContext(context, shader) {
         const source = context.getShaderSource(shader);
+        // console.log("shader : " + shader + ".\n source:" + source);
         const ext = context.getExtension("WEBGL_debug_shaders");
-        const translatedSource = ext ? ext.getTranslatedShaderSource(shader) : null;
+        //console.log("shader : " + shader + ".\n ext:" + ext);
+
+        // const translatedSource = ext ? ext.getTranslatedShaderSource(shader) : null;
+        const translatedSource = null;
+
         const shaderTypeValue = context.getShaderParameter(shader, _types_webglConstants__WEBPACK_IMPORTED_MODULE_0__.WebGlConstants.SHADER_TYPE.value);
         const isFragment = shaderTypeValue === _types_webglConstants__WEBPACK_IMPORTED_MODULE_0__.WebGlConstants.FRAGMENT_SHADER.value;
         const nameInMetadata = (shader && shader.__SPECTOR_Metadata && shader.__SPECTOR_Metadata.name);
@@ -29312,12 +29162,18 @@ class BaseWebGlObject {
     }
     // tslint:disable-next-line:ban-types
     get type() {
+        if (!window[this.typeName]) {
+            // console.log("window without typeName: " + this.typeName);
+        }
         return window[this.typeName] || null;
     }
     tagWebGlObject(webGlObject) {
-        if (false) {}
-        else {
-            if (!this.type) {
+        if (!this.type) {
+            let typeofObj = typeof(webGlObject);
+            if (webGlObject && webGlObject.constructor && webGlObject.constructor.name == this.typeName) {
+                // console.log(webGlObject.constructor.name + " : typeofObj : " + typeofObj + " -> " + this.typeName + " , " + typeof(webGlObject.constructor));
+            }
+            else {
                 return undefined;
             }
         }
@@ -29329,7 +29185,8 @@ class BaseWebGlObject {
         if (tag) {
             return tag;
         }
-        if (webGlObject instanceof this.type) {
+        // if (webGlObject instanceof this.type) 
+        {
             const id = this.getNextId();
             tag = {
                 typeName: this.typeName,
@@ -30217,27 +30074,24 @@ class MVX {
         this.updateAllChildrenState(id, updateCallback);
     }
     setForRender(immediate) {
-        if (true) {
-            if (!this.willRender) {
-                this.willRender = true;
-                if (immediate) {
-                    this.compose();
-                }
-                else {
-                    setTimeout(this.compose.bind(this), MVX.REFRESHRATEINMILLISECONDS);
-                }
+        if (!this.willRender) {
+            this.willRender = true;
+            if (immediate) {
+                this.compose();
+            }
+            else {
+                // mojf
+                // setTimeout(this.compose.bind(this), MVX.REFRESHRATEINMILLISECONDS);
             }
         }
     }
     compose() {
-        if (true) {
-            // Render once.
-            this.willRender = false;
-            // Render and compose.
-            this.compositor.compose(this.rootStateId);
-            // Clean up the pending list of processed states.
-            this.stateStore.flushPendingOperations();
-        }
+        // Render once.
+        this.willRender = false;
+        // Render and compose.
+        this.compositor.compose(this.rootStateId);
+        // Clean up the pending list of processed states.
+        this.stateStore.flushPendingOperations();
     }
 }
 MVX.REFRESHRATEINMILLISECONDS = 100;
@@ -31133,25 +30987,25 @@ class ResultViewMenuComponent extends _mvx_baseComponent__WEBPACK_IMPORTED_MODUL
             </ul>`;
         const element = this.renderElementFromTemplate(htmlString, state, stateId);
         const openButton = element.querySelector(".resultViewMenuOpen");
-        const lis = element.querySelectorAll("li:not(.resultViewMenuSmall)");
+        //const lis = element.querySelectorAll("li:not(.resultViewMenuSmall)"); mojf
         openButton.addEventListener("click", (_) => {
             if (openButton.getAttribute("open") === "true") {
                 openButton.setAttribute("open", "false");
-                if (lis) {
-                    for (let i = 0; i < lis.length; i++) {
-                        lis[i].style.display = "none";
-                        lis[i].style.visibility = "hidden";
-                    }
+                /*
+                for (let i = 0; i < lis.length; i++) {
+                    lis[i].style.display = "none";
+                    lis[i].style.visibility = "hidden";
                 }
+                */
             }
             else {
                 openButton.setAttribute("open", "true");
-                if (lis) {
-                    for (let i = 0; i < lis.length; i++) {
-                        lis[i].style.display = "block";
-                        lis[i].style.visibility = "visible";
-                    }
+                /*
+                for (let i = 0; i < lis.length; i++) {
+                    lis[i].style.display = "block";
+                    lis[i].style.visibility = "visible";
                 }
+                */
             }
         });
         return element;
@@ -31172,7 +31026,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ResultView": () => (/* binding */ ResultView)
 /* harmony export */ });
-/* harmony import */ var _styles_resultView_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../styles/resultView.scss */ "./src/embeddedFrontend/styles/resultView.scss");
+// /* harmony import */ var _styles_resultView_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../styles/resultView.scss */ "./src/embeddedFrontend/styles/resultView.scss");
 /* harmony import */ var _shared_utils_observable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../shared/utils/observable */ "./src/shared/utils/observable.ts");
 /* harmony import */ var _mvx_mvx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../mvx/mvx */ "./src/embeddedFrontend/mvx/mvx.ts");
 /* harmony import */ var _captureList_captureListComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./captureList/captureListComponent */ "./src/embeddedFrontend/resultView/captureList/captureListComponent.ts");
@@ -31318,11 +31172,6 @@ class ResultView {
                 translatedSourceVertex: sourceCodeState.state.translatedSourceVertex,
             });
         });
-        this.sourceCodeComponent.onBeautifyChanged.add((sourceCodeState) => {
-            const state = this.mvx.getGenericState(this.sourceCodeComponentStateId);
-            state.beautify = sourceCodeState.sender.checked;
-            this.mvx.updateState(this.sourceCodeComponentStateId, state);
-        });
         this.updateViewState();
     }
     saveCapture(capture) {
@@ -31415,7 +31264,6 @@ class ResultView {
             fragment,
             translated: false,
             editable: commandState.capture.DrawCall.programStatus.RECOMPILABLE,
-            beautify: true
         }, this.sourceCodeComponent);
         this.commandDetailStateId = this.mvx.addChildState(this.contentStateId, null, this.commandDetailComponent);
         this.displayCurrentCommandDetail(commandState);
@@ -31895,7 +31743,6 @@ class SourceCodeComponent extends _mvx_baseComponent__WEBPACK_IMPORTED_MODULE_0_
         this.onFragmentSourceClicked = this.createEvent("onFragmentSourceClicked");
         this.onSourceCodeCloseClicked = this.createEvent("onSourceCodeCloseClicked");
         this.onSourceCodeChanged = this.createEvent("onSourceCodeChanged");
-        this.onBeautifyChanged = this.createEvent("onBeautifyChanged");
     }
     showError(errorMessage) {
         if (!this.editor) {
@@ -31920,15 +31767,14 @@ class SourceCodeComponent extends _mvx_baseComponent__WEBPACK_IMPORTED_MODULE_0_
     }
     render(state, stateId) {
         const source = state.fragment ? state.sourceFragment : state.sourceVertex;
-        let originalShader;
+        let formattedShader;
         // tslint:disable-next-line:prefer-conditional-expression
         if (state.translated) {
-            originalShader = state.fragment ? state.translatedSourceFragment : state.translatedSourceVertex;
+            formattedShader = state.fragment ? state.translatedSourceFragment : state.translatedSourceVertex;
         }
         else {
-            originalShader = source !== null && source !== void 0 ? source : "";
+            formattedShader = source ? this._indentIfdef(this._beautify(source)) : "";
         }
-        const displayedShader = state.beautify ? this._indentIfdef(this._beautify(originalShader)) : originalShader;
         const htmlString = this.htmlTemplate `
         <div class="sourceCodeComponentContainer">
             <div class="sourceCodeMenuComponentContainer">
@@ -31940,12 +31786,7 @@ class SourceCodeComponent extends _mvx_baseComponent__WEBPACK_IMPORTED_MODULE_0_
                     <li><a href="#" role="button" commandName="onSourceCodeCloseClicked">Close</a></li>
                 </ul>
             </div>
-            $${this.htmlTemplate `<div class="sourceCodeComponent">${displayedShader}</div>`}
-            <div class="sourceCodeMenuComponentFooter">
-                <p>
-                    <label><input type="checkbox" commandName="onBeautifyChanged" ${state.beautify ? "checked" : ""} /> Beautify</label>
-                </p>
-            </div>
+            $${this.htmlTemplate `<div class="sourceCodeComponent">${formattedShader}</div>`}
         </div>`;
         const element = this.renderElementFromTemplate(htmlString.replace(/<br>/g, "\n"), state, stateId);
         this.editor = ace.edit(element.querySelector(".sourceCodeComponent"));
@@ -31977,34 +31818,16 @@ class SourceCodeComponent extends _mvx_baseComponent__WEBPACK_IMPORTED_MODULE_0_
      * Beautify the given string : correct indentation according to brackets
      */
     _beautify(glsl, level = 0) {
-        let spaces = "";
-        for (let i = 0; i < level; i++) {
-            spaces += "    "; // 4 spaces
-        }
-        const untrimmedGlsl = glsl;
-        glsl = glsl.trim();
-        // If preprocessor, indent the preprocessor line and beautify the rest
-        if (glsl[0] === "#") {
-            // Figure out if we trimmed away a newline
-            const preprocessorStart = untrimmedGlsl.indexOf("#");
-            const newline = untrimmedGlsl.indexOf("\n");
-            let preservedNewline = "";
-            if (newline !== -1) {
-                if (newline < preprocessorStart) {
-                    preservedNewline = spaces + "\n";
-                }
-            }
-            const firstLineEnd = glsl.indexOf("\n");
-            const preprocessorLineEnd = (firstLineEnd !== -1) ? firstLineEnd : glsl.length;
-            const preprocessorLine = glsl.substr(0, preprocessorLineEnd);
-            const rest = glsl.substr(preprocessorLineEnd + 1);
-            return preservedNewline + spaces + preprocessorLine + "\n" + this._beautify(rest, level);
-        }
         // return condition : no brackets at all
+        glsl = glsl.trim();
         glsl = this._adaptComments(glsl);
         const brackets = this._getBracket(glsl);
         const firstBracket = brackets.firstIteration;
         const lastBracket = brackets.lastIteration;
+        let spaces = "";
+        for (let i = 0; i < level; i++) {
+            spaces += "    "; // 4 spaces
+        }
         let result;
         // If no brackets, return the indented string
         if (firstBracket === -1) {
@@ -32021,14 +31844,13 @@ class SourceCodeComponent extends _mvx_baseComponent__WEBPACK_IMPORTED_MODULE_0_
         else {
             // if brackets, beautify the inside
             // let insideWithBrackets = glsl.substr(firstBracket, lastBracket-firstBracket+1);
-            const left = glsl.substr(0, firstBracket).trim();
-            const right = glsl.substr(lastBracket + 1, glsl.length).trim();
+            const left = glsl.substr(0, firstBracket);
+            const right = glsl.substr(lastBracket + 1, glsl.length);
             const inside = glsl.substr(firstBracket + 1, lastBracket - firstBracket - 1).trim();
-            const prettyLeft = (left === "") ? spaces + "{" : this._beautify(left, level) + " {\n";
             const prettyInside = this._beautify(inside, level + 1);
-            const prettyRight = this._beautify(right, level);
-            result = prettyLeft + prettyInside + "\n" + spaces + "}\n" + prettyRight;
+            result = this._beautify(left, level) + " {\n" + prettyInside + "\n" + spaces + "}\n" + this._beautify(right, level);
             result = result.replace(/\s*\n+\s*;/g, ";"); // Orphan ;
+            result = result.replace(/#endif[\t \f\v]*{/g, "\n {"); // Curly after #Endig
         }
         result = result.replace(SourceCodeComponent.semicolonReplacementKeyRegex, ";");
         result = result.replace(SourceCodeComponent.openCurlyReplacementKeyRegex, "{");
@@ -32502,13 +32324,9 @@ class Time {
             this.nowFunction = date.getTime.bind(date);
         }
     }
-    dateBasedPerformanceNow() {
-        if (performance.timing && performance.timing.navigationStart) {
-            return performance.timing.navigationStart + performance.now();
-        }
-        else {
-            return performance.now();
-        }
+    dateBasedPerformanceNow() { 
+        // return performance.timing.navigationStart + performance.now();
+        return performance.now(); // mojf 
     }
     static get now() {
         return Time.instance.nowFunction();
@@ -32540,7 +32358,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _backend_webGlObjects_webGlObjects__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./backend/webGlObjects/webGlObjects */ "./src/backend/webGlObjects/webGlObjects.ts");
 /* harmony import */ var _embeddedFrontend_captureMenu_captureMenu__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./embeddedFrontend/captureMenu/captureMenu */ "./src/embeddedFrontend/captureMenu/captureMenu.ts");
 /* harmony import */ var _embeddedFrontend_resultView_resultView__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./embeddedFrontend/resultView/resultView */ "./src/embeddedFrontend/resultView/resultView.ts");
-/* harmony import */ var _backend_spies_xrSpy__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./backend/spies/xrSpy */ "./src/backend/spies/xrSpy.ts");
 
 
 
@@ -32550,7 +32367,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+// import { XRSpy } from "./backend/spies/xrSpy";
 const CAPTURE_LIMIT = 10000; // Limit command count to 10000 record (to be kept in sync with the documentation)
 const EmbeddedFrontend = {
     CaptureMenu: _embeddedFrontend_captureMenu_captureMenu__WEBPACK_IMPORTED_MODULE_7__.CaptureMenu,
@@ -32575,9 +32392,9 @@ class Spector {
         this.timeSpy.onError.add(this.onErrorInternal, this);
         // if we want to capture WebXR sessions, we have to polyfill a bunch of stuff to ensure Spector.JS has access to the session
         // and the GL context. So we do that here.
-        if (this.options.enableXRCapture) {
-            this.xrSpy = new _backend_spies_xrSpy__WEBPACK_IMPORTED_MODULE_9__.XRSpy(this.timeSpy);
-        }
+        // if (this.options.enableXRCapture) {
+        //     this.xrSpy = new XRSpy(this.timeSpy);
+        // }
     }
     static getFirstAvailable3dContext(canvas) {
         // Custom detection to run in the extension.
@@ -32610,45 +32427,41 @@ class Spector {
         return context;
     }
     displayUI(disableTracking = false) {
-        if (true) {
-            if (!this.captureMenu) {
-                this.getCaptureUI();
-                this.captureMenu.onPauseRequested.add(this.pause, this);
-                this.captureMenu.onPlayRequested.add(this.play, this);
-                this.captureMenu.onPlayNextFrameRequested.add(this.playNextFrame, this);
-                this.captureMenu.onCaptureRequested.add((info) => {
-                    if (info) {
-                        this.captureCanvas(info.ref);
-                    }
-                }, this);
-                setInterval(() => { this.captureMenu.setFPS(this.getFps()); }, 1000);
-                if (!disableTracking) {
-                    this.captureMenu.trackPageCanvases();
+        if (!this.captureMenu) {
+            this.getCaptureUI();
+            this.captureMenu.onPauseRequested.add(this.pause, this);
+            this.captureMenu.onPlayRequested.add(this.play, this);
+            this.captureMenu.onPlayNextFrameRequested.add(this.playNextFrame, this);
+            this.captureMenu.onCaptureRequested.add((info) => {
+                if (info) {
+                    this.captureCanvas(info.ref);
                 }
-                this.captureMenu.display();
+            }, this);
+            setInterval(() => { this.captureMenu.setFPS(this.getFps()); }, 1000);
+            if (!disableTracking) {
+                this.captureMenu.trackPageCanvases();
             }
-            if (!this.resultView) {
-                this.getResultUI();
-                this.onCapture.add((capture) => {
-                    this.resultView.display();
-                    this.resultView.addCapture(capture);
-                });
-            }
+            this.captureMenu.display();
+        }
+        if (!this.resultView) {
+            this.getResultUI();
+            this.onCapture.add((capture) => {
+                this.resultView.display();
+                this.resultView.addCapture(capture);
+            });
         }
     }
     getResultUI() {
-        if (true) {
-            if (!this.resultView) {
-                this.resultView = new _embeddedFrontend_resultView_resultView__WEBPACK_IMPORTED_MODULE_8__.ResultView();
-                this.resultView.onSourceCodeChanged.add((sourceCodeEvent) => {
-                    this.rebuildProgramFromProgramId(sourceCodeEvent.programId, sourceCodeEvent.sourceVertex, sourceCodeEvent.sourceFragment, (program) => {
-                        this.referenceNewProgram(sourceCodeEvent.programId, program);
-                        this.resultView.showSourceCodeError(null);
-                    }, (error) => {
-                        this.resultView.showSourceCodeError(error);
-                    });
+        if (!this.resultView) {
+            this.resultView = new _embeddedFrontend_resultView_resultView__WEBPACK_IMPORTED_MODULE_8__.ResultView();
+            this.resultView.onSourceCodeChanged.add((sourceCodeEvent) => {
+                this.rebuildProgramFromProgramId(sourceCodeEvent.programId, sourceCodeEvent.sourceVertex, sourceCodeEvent.sourceFragment, (program) => {
+                    this.referenceNewProgram(sourceCodeEvent.programId, program);
+                    this.resultView.showSourceCodeError(null);
+                }, (error) => {
+                    this.resultView.showSourceCodeError(error);
                 });
-            }
+            });
         }
         return this.resultView;
     }
@@ -32884,10 +32697,11 @@ class Spector {
         if (!this.options.enableXRCapture) {
             _shared_utils_logger__WEBPACK_IMPORTED_MODULE_1__.Logger.error("Cannot retrieve WebXR context if capturing WebXR is disabled.");
         }
-        if (!this.xrSpy.currentXRSession) {
-            _shared_utils_logger__WEBPACK_IMPORTED_MODULE_1__.Logger.error("No currently active WebXR session.");
-        }
-        return this.xrSpy.currentXRSession.glContext;
+        // if (!this.xrSpy.currentXRSession) {
+        //     Logger.error("No currently active WebXR session.");
+        // }
+        // return this.xrSpy.currentXRSession.glContext;
+        return null;
     }
     onFrameStart() {
         if (this.captureNextCommands > 0) {
@@ -34201,6 +34015,7 @@ dom.importCssString(exports.cssText, exports.cssClass);
 /******/ 	
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
+                // console.log("__webpack_require__:" + moduleId + ", " + module + " -> " + module.exports);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -34276,12 +34091,12 @@ dom.importCssString(exports.cssText, exports.cssClass);
 /******/ 	__webpack_require__("./vendors/ace.js");
 /******/ 	__webpack_require__("./vendors/ace-mode-glsl.js");
 /******/ 	__webpack_require__("./vendors/ace-theme-monokai.js");
-/******/ 	__webpack_require__("./vendors/ace-theme-override.css");
+/******/ 	//__webpack_require__("./vendors/ace-theme-override.css");
 /******/ 	__webpack_require__("./vendors/ace-ext-searchbox.js");
 /******/ 	var __webpack_exports__ = __webpack_require__("./src/spector.ts");
-/******/ 	
+/******/ 	console.log("before return __webpack_exports__ : " + __webpack_exports__);
 /******/ 	return __webpack_exports__;
 /******/ })()
 ;
 });
-//# sourceMappingURL=spector.bundle.dev.js.map
+//# sourceMappingURL=spector.bundle.js.map

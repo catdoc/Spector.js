@@ -121,7 +121,8 @@ export class Spector {
     }
 
     public displayUI(disableTracking: boolean = false) {
-        if (!isMinigame) {
+        if (!isMinigame)
+        {
             if (!this.captureMenu) {
                 this.getCaptureUI();
 
@@ -154,7 +155,8 @@ export class Spector {
     }
 
     public getResultUI(): ResultView {
-        if (!isMinigame) {
+        if (!isMinigame)
+        {
             if (!this.resultView) {
                 this.resultView = new ResultView();
                 this.resultView.onSourceCodeChanged.add((sourceCodeEvent) => {

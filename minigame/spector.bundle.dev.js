@@ -6787,7 +6787,7 @@ class ReadProgramHelper {
     static readShaderFromContext(context, shader) {
         const source = context.getShaderSource(shader);
         const ext = context.getExtension("WEBGL_debug_shaders");
-        const translatedSource = ext ? ext.getTranslatedShaderSource(shader) : null;
+        const translatedSource = ( false) ? 0 : null;
         const shaderTypeValue = context.getShaderParameter(shader, _types_webglConstants__WEBPACK_IMPORTED_MODULE_0__.WebGlConstants.SHADER_TYPE.value);
         const isFragment = shaderTypeValue === _types_webglConstants__WEBPACK_IMPORTED_MODULE_0__.WebGlConstants.FRAGMENT_SHADER.value;
         const nameInMetadata = (shader && shader.__SPECTOR_Metadata && shader.__SPECTOR_Metadata.name);
@@ -6882,9 +6882,16 @@ class BaseWebGlObject {
         return window[this.typeName] || null;
     }
     tagWebGlObject(webGlObject) {
-        if (!this.type) {
-            return undefined;
+        if (true) {
+            // let typeofObj = typeof(webGlObject);
+            if (webGlObject && webGlObject.constructor && webGlObject.constructor.name === this.typeName) {
+                // console.log(webGlObject.constructor.name + " : typeofObj : " + typeofObj + " -> " + this.typeName + " , " + typeof(webGlObject.constructor));
+            }
+            else {
+                return undefined;
+            }
         }
+        else {}
         let tag;
         if (!webGlObject) {
             return tag;
@@ -6893,7 +6900,7 @@ class BaseWebGlObject {
         if (tag) {
             return tag;
         }
-        if (webGlObject instanceof this.type) {
+        if (true) {
             const id = this.getNextId();
             tag = {
                 typeName: this.typeName,
