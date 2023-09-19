@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 var MAIN_DIR = path.resolve(__dirname, "../");
 var BUILD_DIR = path.resolve(MAIN_DIR, "./dist");
-var DEV_DIR = path.resolve(MAIN_DIR, "./minigame");
+var MINIGAME_DIR = path.resolve(MAIN_DIR, "./minigame");
 
 var buildConfig = function(env) {
     var isProd = env.prod !== undefined;
@@ -27,10 +27,10 @@ var buildConfig = function(env) {
             "./src/spector.ts"
         ],
         output: {
-            path: isProd ? BUILD_DIR : DEV_DIR,
+            path: isMinigame ? MINIGAME_DIR : BUILD_DIR,
             publicPath: "/",
             filename: isProd ? "spector.bundle.js" : "spector.bundle.dev.js",
-            libraryTarget: "umd",
+            libraryTarget: isMinigame ? "window" : "umd",
             library: "SPECTOR",
             umdNamedDefine: true
         },

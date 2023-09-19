@@ -1,14 +1,4 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define("SPECTOR", [], factory);
-	else if(typeof exports === 'object')
-		exports["SPECTOR"] = factory();
-	else
-		root["SPECTOR"] = factory();
-})(self, () => {
-return /******/ (() => { // webpackBootstrap
+/******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
@@ -10491,8 +10481,7 @@ class Spector {
 
 })();
 
-/******/ 	return __webpack_exports__;
+window.SPECTOR = __webpack_exports__;
 /******/ })()
 ;
-});
 //# sourceMappingURL=spector.bundle.dev.js.map
