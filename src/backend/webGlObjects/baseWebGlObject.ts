@@ -42,8 +42,19 @@ export abstract class BaseWebGlObject {
     }
 
     public tagWebGlObject(webGlObject: any): WebGlObjectTag {
-        if (!this.type) {
-            return undefined;
+        if (isMinigame) {
+            // let typeofObj = typeof(webGlObject);
+            if (webGlObject && webGlObject.constructor && webGlObject.constructor.name === this.typeName) {
+                // console.log(webGlObject.constructor.name + " : typeofObj : " + typeofObj + " -> " + this.typeName + " , " + typeof(webGlObject.constructor));
+            }
+            else {
+                return undefined;
+            }
+        }
+        else {
+            if (!this.type) {
+                return undefined;
+            }
         }
 
         let tag: WebGlObjectTag;
@@ -56,7 +67,7 @@ export abstract class BaseWebGlObject {
             return tag;
         }
 
-        if (webGlObject instanceof this.type) {
+        if (isMinigame || webGlObject instanceof this.type) {
             const id = this.getNextId();
             tag = {
                 typeName: this.typeName,
